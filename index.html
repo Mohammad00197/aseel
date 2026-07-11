@@ -125,6 +125,7 @@
   .opt:active{transform:scale(.97)}
   .opt.open{background:#fbeff4;color:var(--accent-deep);border:1px dashed #d68aa6}
   .writebox{display:flex;gap:9px;align-items:center;margin-top:4px}
+  .writebox[hidden]{display:none}
   .writebox.shake{animation:shake .4s ease}
   .wtext{flex:1;font-family:inherit;font-size:15px;color:var(--ink);background:#fff;
     border:1px solid #00000012;border-radius:14px;padding:14px 16px;outline:none;
@@ -291,8 +292,12 @@
         {t:"لا شي… بتعجبني هيك 🙈",ok:true},{t:"اكتبيها ✍️",open:true}
       ] },
 
-    { type:"yesno", emoji:"😄", q:"لو حكيتلك نكتة بايخة… بتضحكيلي مجاملة؟",
-      sub:"كوني صادقة 😅", yes:"بضحكلك 😄", no:"لأ" },
+    { type:"choice", emoji:"🔥", q:"لو قرّبت منّك فجأة… وهمست بإذنك، شو بتعملي؟",
+      sub:"بصراحة 😏",
+      options:[
+        {t:"بتسمّر بمكاني 🙈",ok:true},{t:"بكسّف بس بيعجبني",ok:true},
+        {t:"بهمس ردّ 😏",ok:true},{t:"بابعد 🙄",ok:false}
+      ] },
 
     { type:"choice", emoji:"🌟", q:"شو بيوصل لقلبك أكتر؟",
       sub:"بينا وبينك.",
