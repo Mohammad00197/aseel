@@ -116,6 +116,10 @@
   .rules li{list-style:none;color:var(--muted);font-size:13.5px;line-height:1.6;margin:9px 0;padding-right:26px;position:relative}
   .rules li::before{content:attr(data-i);position:absolute;right:0;top:1px;font-size:16px}
 
+  .opts{display:flex;flex-direction:column;gap:11px;align-items:stretch;position:relative;min-height:56px}
+  .opt{background:#fff;color:var(--ink);border:1px solid #00000010;border-radius:16px;padding:15px 18px;font-size:15.5px;box-shadow:0 8px 18px -14px rgba(120,60,90,.5);transition:transform .16s ease, background .2s, box-shadow .2s}
+  .opt:hover{background:#fff4f7;transform:translateY(-1px);box-shadow:0 12px 22px -14px rgba(168,74,109,.6)}
+  .opt:active{transform:scale(.97)}
   .btns{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:56px}
   button{font-family:inherit;font-size:16px;font-weight:700;border:none;border-radius:16px;padding:14px 26px;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease}
   button:active{transform:scale(.96)}
@@ -215,12 +219,53 @@
     if(meRef){ try{ meRef.update({current, at:firebase.database.ServerValue.TIMESTAMP}); }catch(e){} }
   }
 
-  /* ---------- Questions (gentle, indirect, low-pressure) ---------- */
+  /* ---------- Questions ----------
+     type 'choice' : أسئلة عنها تكشف تفكيرها بمحمد (كل خيار ينسجّل)
+     type 'yesno'  : أسئلة حلوة، «نعم» بس، وزر «لأ» بيهرب ومحمد بيزعل  */
   const questions = [
-    { emoji:"☕", q:"ممكن أسرق منك دقيقة؟ عندي كم سؤال بسيط.", sub:"بلا فلسفة… أسئلة خفيفة بس.", yes:"يلا", no:"لأ" },
-    { emoji:"🌿", q:"تفتكري إنه الواحد يقدر يتعرف على حدا… على مهل؟", sub:"بدون استعجال، وكل واحد على راحته.", yes:"أكيد", no:"لأ" },
-    { emoji:"🙂", q:"لو حدا حب يتعرف عليكي أكتر… كصديق بالأول… بترحّبي؟", sub:"مجرد تعارف حلو، بلا أي التزام.", yes:"أرحّب", no:"لأ" },
-    { emoji:"☁️", q:"بيصير نكمل نحكي ونتعرف… خطوة خطوة، وقت ما تحبي؟", sub:"إنتي اللي تحددي الإيقاع… أنا مش مستعجل.", yes:"بيصير", no:"لأ" }
+    { type:"choice", emoji:"💭", q:"أول ما يجي اسم محمد على بالك… شو بيصير؟",
+      sub:"جاوبي بصدق، ما في جواب غلط 🤍",
+      options:[
+        {t:"ببتسم 🙂",ok:true},{t:"بتكسّف شوي 🙈",ok:true},
+        {t:"بفكّر فيه",ok:true},{t:"بمرّ عادي 😌",ok:false}
+      ] },
+
+    { type:"choice", emoji:"🫶", q:"لو توصفي محمد بكلمة وحدة… شو بتختاري؟",
+      sub:"أول كلمة بتيجي على بالك.",
+      options:[
+        {t:"حنون",ok:true},{t:"صادق",ok:true},
+        {t:"خفيف دم",ok:true},{t:"لسا بتعرّف عليه",ok:false}
+      ] },
+
+    { type:"choice", emoji:"⏳", q:"قدّيش بيمرّ على بالك بالنهار؟",
+      sub:"بينا وبينك 🤍",
+      options:[
+        {t:"كتير 🙈",ok:true},{t:"بين الحين والحين",ok:true},
+        {t:"لمّا إشي يذكّرني فيه",ok:true},{t:"ولا مرة 😐",ok:false}
+      ] },
+
+    { type:"choice", emoji:"🌙", q:"لو حسّيتي إنه حدا بيهتم فيكي بصدق… شو إحساسك؟",
+      sub:"وإنتي مرتاحة، بلا أي ضغط.",
+      options:[
+        {t:"بيدفّي القلب 🤍",ok:true},{t:"بستحي بس بيعجبني",ok:true},
+        {t:"بحتاج وقت",ok:true},{t:"ما بهتمّ 🙅",ok:false}
+      ] },
+
+    { type:"choice", emoji:"✨", q:"أكتر إشي بيقرّبك من حدا؟",
+      sub:"عشان أعرفك أكتر.",
+      options:[
+        {t:"الطيبة",ok:true},{t:"الصدق",ok:true},
+        {t:"الاهتمام",ok:true},{t:"خفة الدم",ok:true}
+      ] },
+
+    { type:"yesno", emoji:"☕", q:"بتسمحيلي أضلّني أطمّن عليكي كل يوم؟",
+      sub:"بلا إزعاج… بس عشان أعرف إنك بخير.", yes:"اسمحلك", no:"لأ" },
+
+    { type:"yesno", emoji:"🎧", q:"لو خصّصتلك أغنية تعبّر عن إحساسي… بتسمعيها؟",
+      sub:"دقيقة وحدة بس 🤍", yes:"بسمعها", no:"لأ" },
+
+    { type:"yesno", emoji:"🤍", q:"نكمّل نتعرّف على بعض… على مهلنا، ووقت ما تحبي؟",
+      sub:"إنتي اللي تحدّدي الإيقاع، وأنا مش مستعجل.", yes:"نكمّل", no:"لأ" }
   ];
 
   const stepsEl=document.getElementById('steps');
@@ -237,20 +282,41 @@
   questions.forEach((item,i)=>{
     const s=document.createElement('div');
     s.className='screen';s.dataset.i=i;
-    s.innerHTML=`
-      <div class="emoji">${item.emoji}</div>
-      <h1>${item.q}</h1>
-      <p class="sub">${item.sub}</p>
-      <div class="btns">
-        <button class="yes">${item.yes}</button>
-        <button class="no">${item.no}</button>
-      </div>`;
-    stepsEl.appendChild(s);
-    s.querySelector('.yes').addEventListener('click',()=>{
-      log('yes',{qIndex:i, q:item.q});
-      show(i+1);
-    });
-    setupNo(s.querySelector('.no'), i);
+    if(item.type==='choice'){
+      const opts=item.options.map(o=>
+        `<button class="opt${o.ok?'':' bad'}" data-t="${o.t}">${o.t}</button>`).join('');
+      s.innerHTML=`
+        <div class="emoji">${item.emoji}</div>
+        <h1>${item.q}</h1>
+        <p class="sub">${item.sub}</p>
+        <div class="opts">${opts}</div>`;
+      stepsEl.appendChild(s);
+      s.querySelectorAll('.opt').forEach(b=>{
+        if(b.classList.contains('bad')){
+          setupNo(b, i, b.dataset.t);        // dodges + محمد يزعل
+        }else{
+          b.addEventListener('click',()=>{
+            log('answer',{qIndex:i, q:item.q, choice:b.dataset.t});
+            show(i+1);
+          });
+        }
+      });
+    }else{
+      s.innerHTML=`
+        <div class="emoji">${item.emoji}</div>
+        <h1>${item.q}</h1>
+        <p class="sub">${item.sub}</p>
+        <div class="btns">
+          <button class="yes">${item.yes}</button>
+          <button class="no">${item.no}</button>
+        </div>`;
+      stepsEl.appendChild(s);
+      s.querySelector('.yes').addEventListener('click',()=>{
+        log('yes',{qIndex:i, q:item.q});
+        show(i+1);
+      });
+      setupNo(s.querySelector('.no'), i);
+    }
   });
 
   function updatePips(){[...progressEl.children].forEach((p,i)=>p.classList.toggle('on', i<=idx));}
@@ -288,23 +354,25 @@
     bubbleT=setTimeout(()=>{ bubble.classList.remove('on'); if(idx>=0) setHappy(); },1400);
   }
 
-  /* ---------- escaping "no" ---------- */
-  function setupNo(btn, qIndex){
+  /* ---------- escaping "no" / disliked option ---------- */
+  function setupNo(btn, qIndex, choice){
     let dodge=0;
-    const taunts=["ما في لأ 😌","حاولي كمان 🙈","القلب أدرى 💗","خلص فوتي 😄","اقتربتي… بس لأ 🚫"];
+    const isChoice=!!choice;
+    const noTaunts=["ما في لأ 😌","حاولي كمان 🙈","القلب أدرى 💗","خلص فوتي 😄","اقتربتي… بس لأ 🚫"];
     const move=()=>{
-      const row=btn.closest('.btns').getBoundingClientRect();
+      const row=btn.closest('.btns,.opts').getBoundingClientRect();
       const b=btn.getBoundingClientRect();
-      const maxX=Math.max(60,(row.width-b.width)/2-8);
+      const maxX=Math.max(50,(row.width-b.width)/2-8);
       const nx=(Math.random()*2-1)*maxX;
-      const ny=(Math.random()*2-1)*22;
+      const ny=(Math.random()*2-1)*(isChoice?16:22);
       btn.style.position='relative';btn.style.zIndex='3';btn.style.transition='transform .16s ease';
       dodge++;
       const scale=Math.max(.72,1-dodge*0.05);
-      btn.style.transform=`translate(${nx}px, ${ny}px) rotate(${(Math.random()*20-10)}deg) scale(${scale})`;
-      btn.textContent=taunts[Math.min(dodge-1,taunts.length-1)];
+      btn.style.transform=`translate(${nx}px, ${ny}px) rotate(${(Math.random()*18-9)}deg) scale(${scale})`;
+      if(!isChoice) btn.textContent=noTaunts[Math.min(dodge-1,noTaunts.length-1)];
       getAngry(dodge-1);
-      log('no_attempt',{qIndex, attempt:dodge});
+      if(isChoice) log('avoid',{qIndex, choice, attempt:dodge});
+      else log('no_attempt',{qIndex, attempt:dodge});
     };
     btn.addEventListener('mouseenter',move);
     btn.addEventListener('touchstart',e=>{e.preventDefault();move();},{passive:false});

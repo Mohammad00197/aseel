@@ -33,6 +33,7 @@
   .ic{width:34px;height:34px;min-width:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;background:#2a2338}
   .row .txt{flex:1;font-size:14px}
   .row .txt small{display:block;color:#8f84a4;font-size:11px;margin-top:2px}
+  .row.answer .ic{background:#1e2647}
   .row.yes .ic{background:#173a2a}
   .row.no_attempt .ic{background:#3a1720}
   .row.final .ic{background:#3a3417}
@@ -79,7 +80,8 @@
   meRef.set({online:true, since:firebase.database.ServerValue.TIMESTAMP});
 
   /* --- watch aseel presence --- */
-  const curMap={intro:'المقدمة',q1:'السؤال 1',q2:'السؤال 2',q3:'السؤال 3',q4:'السؤال 4',final:'خلّصت 🤍'};
+  const curMap={intro:'المقدمة',q1:'السؤال 1',q2:'السؤال 2',q3:'السؤال 3',q4:'السؤال 4',
+    q5:'السؤال 5',q6:'السؤال 6',q7:'السؤال 7',q8:'السؤال 8',final:'خلّصت 🤍'};
   db.ref('presence/aseel').on('value',s=>{
     const on=s.exists()&&s.val()&&s.val().online;
     document.getElementById('pdot').classList.toggle('on',!!on);
@@ -92,8 +94,10 @@
   const feed=document.getElementById('feed');
   const meta={
     start:{ic:'🚀',bg:'start',t:'أسيل بدأت'},
+    answer:{ic:'💬',bg:'answer',t:'اختارت'},
     yes:{ic:'💗',bg:'yes',t:'قالت نعم'},
     no_attempt:{ic:'🙈',bg:'no_attempt',t:'حاولت تضغط لأ'},
+    avoid:{ic:'🫣',bg:'no_attempt',t:'حاولت تختار جواب هرب منها'},
     final:{ic:'🎉',bg:'final',t:'وصلت للنهاية 🤍'},
     restart:{ic:'🔁',bg:'restart',t:'رجعت من الأول'}
   };
@@ -105,9 +109,11 @@
     const e=snap.val()||{}; const m=meta[e.type]||{ic:'•',bg:'',t:e.type};
     if(first){ feed.innerHTML=''; first=false; }
     if(e.type==='yes') document.getElementById('cYes').textContent=++yes;
-    if(e.type==='no_attempt') document.getElementById('cNo').textContent=++no;
+    if(e.type==='no_attempt'||e.type==='avoid') document.getElementById('cNo').textContent=++no;
     let detail='';
     if(e.type==='yes'&&e.q) detail=e.q;
+    else if(e.type==='answer') detail=(e.choice||'')+(e.q?' — '+e.q:'');
+    else if(e.type==='avoid') detail='«'+(e.choice||'')+'» (محاولة '+(e.attempt||1)+')';
     else if(e.type==='no_attempt') detail='محاولة رقم '+(e.attempt||1);
     const row=document.createElement('div');
     row.className='row '+m.bg;
