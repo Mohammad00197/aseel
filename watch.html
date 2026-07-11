@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <title>لوحة محمد — مباشر</title>
 <style>
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -81,7 +84,8 @@
 
   /* --- watch aseel presence --- */
   const curMap={intro:'المقدمة',q1:'السؤال 1',q2:'السؤال 2',q3:'السؤال 3',q4:'السؤال 4',
-    q5:'السؤال 5',q6:'السؤال 6',q7:'السؤال 7',q8:'السؤال 8',final:'خلّصت 🤍'};
+    q5:'السؤال 5',q6:'السؤال 6',q7:'السؤال 7',q8:'السؤال 8',q9:'السؤال 9',q10:'السؤال 10',
+    q11:'السؤال 11',q12:'السؤال 12',q13:'السؤال 13',final:'خلّصت 🤍'};
   db.ref('presence/aseel').on('value',s=>{
     const on=s.exists()&&s.val()&&s.val().online;
     document.getElementById('pdot').classList.toggle('on',!!on);

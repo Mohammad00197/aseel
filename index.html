@@ -4,6 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="theme-color" content="#f5ede6" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <title>كم سؤال بسيط…</title>
 <style>
   :root{
@@ -244,11 +247,32 @@
         {t:"لمّا إشي يذكّرني فيه",ok:true},{t:"ولا مرة 😐",ok:false}
       ] },
 
+    { type:"choice", emoji:"🌧️", q:"لو مرّ يوم بدون ما نحكي… بتحسّي بفرق؟",
+      sub:"بصراحة صغيرة 🤍",
+      options:[
+        {t:"آه بيصير ناقص إشي",ok:true},{t:"بفتقد الونسة",ok:true},
+        {t:"بسأل عنّك",ok:true},{t:"ولا إشي 😐",ok:false}
+      ] },
+
     { type:"choice", emoji:"🌙", q:"لو حسّيتي إنه حدا بيهتم فيكي بصدق… شو إحساسك؟",
       sub:"وإنتي مرتاحة، بلا أي ضغط.",
       options:[
         {t:"بيدفّي القلب 🤍",ok:true},{t:"بستحي بس بيعجبني",ok:true},
         {t:"بحتاج وقت",ok:true},{t:"ما بهتمّ 🙅",ok:false}
+      ] },
+
+    { type:"choice", emoji:"💌", q:"لو وصلتك رسالة الصبح كل يوم… شو رح تحسّي؟",
+      sub:"تخيّلي بس.",
+      options:[
+        {t:"بتفرّحني 🤍",ok:true},{t:"بتونّس صبحي",ok:true},
+        {t:"بتصير عادة حلوة",ok:true},{t:"بتزهّقني 😅",ok:false}
+      ] },
+
+    { type:"choice", emoji:"🌟", q:"صار في حدا مؤخرًا… بيفرق معك أكتر من قبل؟",
+      sub:"ما لازم تقولي مين 🙂",
+      options:[
+        {t:"آه 🙈",ok:true},{t:"يمكن…",ok:true},
+        {t:"لسا بكتشف",ok:true},{t:"لأ أبدًا",ok:false}
       ] },
 
     { type:"choice", emoji:"✨", q:"أكتر إشي بيقرّبك من حدا؟",
@@ -261,8 +285,14 @@
     { type:"yesno", emoji:"☕", q:"بتسمحيلي أضلّني أطمّن عليكي كل يوم؟",
       sub:"بلا إزعاج… بس عشان أعرف إنك بخير.", yes:"اسمحلك", no:"لأ" },
 
+    { type:"yesno", emoji:"☎️", q:"لو صار في مكالمة بيننا بالليل… بتردّي؟",
+      sub:"وقت ما تكوني فاضية بس.", yes:"بردّ", no:"لأ" },
+
     { type:"yesno", emoji:"🎧", q:"لو خصّصتلك أغنية تعبّر عن إحساسي… بتسمعيها؟",
       sub:"دقيقة وحدة بس 🤍", yes:"بسمعها", no:"لأ" },
+
+    { type:"yesno", emoji:"🌹", q:"ولو كبر الإحساس شوي شوي مع الوقت… بتعطيه فرصة؟",
+      sub:"بدون وعود، بس بصدق.", yes:"بعطيه فرصة", no:"لأ" },
 
     { type:"yesno", emoji:"🤍", q:"نكمّل نتعرّف على بعض… على مهلنا، ووقت ما تحبي؟",
       sub:"إنتي اللي تحدّدي الإيقاع، وأنا مش مستعجل.", yes:"نكمّل", no:"لأ" }
