@@ -123,6 +123,15 @@
   .opt{background:#fff;color:var(--ink);border:1px solid #00000010;border-radius:16px;padding:15px 18px;font-size:15.5px;box-shadow:0 8px 18px -14px rgba(120,60,90,.5);transition:transform .16s ease, background .2s, box-shadow .2s}
   .opt:hover{background:#fff4f7;transform:translateY(-1px);box-shadow:0 12px 22px -14px rgba(168,74,109,.6)}
   .opt:active{transform:scale(.97)}
+  .opt.open{background:#fbeff4;color:var(--accent-deep);border:1px dashed #d68aa6}
+  .writebox{display:flex;gap:9px;align-items:center;margin-top:4px}
+  .writebox.shake{animation:shake .4s ease}
+  .wtext{flex:1;font-family:inherit;font-size:15px;color:var(--ink);background:#fff;
+    border:1px solid #00000012;border-radius:14px;padding:14px 16px;outline:none;
+    box-shadow:0 8px 18px -14px rgba(120,60,90,.5)}
+  .wtext:focus{border-color:var(--accent)}
+  .wsend{background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;
+    border-radius:14px;padding:14px 18px;font-size:15px;box-shadow:0 10px 20px -10px rgba(168,74,109,.7)}
   .btns{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:56px}
   button{font-family:inherit;font-size:16px;font-weight:700;border:none;border-radius:16px;padding:14px 26px;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease}
   button:active{transform:scale(.96)}
@@ -160,14 +169,14 @@
       <!-- intro -->
       <div id="intro" class="screen active">
         <div class="emoji">🤍</div>
-        <h1>أهلين أسيل 😏</h1>
-        <p class="sub">جولة جديدة… بس هالمرة أجرأ شوي.</p>
+        <h1>أهلين أسيل 🙂</h1>
+        <p class="sub">لعبة صغيرة… كم سؤال حلو نتسلّى فيه.</p>
         <ul class="rules">
-          <li data-i="🎯">جاوبي بصراحة، ما في جواب غلط.</li>
-          <li data-i="🔥">أسئلة خفيفة… ومشاغبة شوي.</li>
+          <li data-i="🎯">جاوبي على راحتك، ما في جواب غلط.</li>
+          <li data-i="✍️">وفي أسئلة بتقدري تكتبي جوابك فيها.</li>
           <li data-i="😄">وزر الـ«لأ»… بدلّع، لا تزعلي منه.</li>
         </ul>
-        <div class="btns"><button class="start" id="startBtn">يلا نلعب 😏</button></div>
+        <div class="btns"><button class="start" id="startBtn">يلا نلعب</button></div>
       </div>
 
       <!-- questions injected here -->
@@ -175,9 +184,9 @@
 
       <!-- final -->
       <div id="final" class="screen">
-        <div class="big">😏</div>
-        <h1>خلصت الجولة…</h1>
-        <p class="sub">بس عن جد؟ طلعتي أحلى وأشقى مما توقّعت 🙈<br>الباقي… منكمّله على الخاص.</p>
+        <div class="big">🤍</div>
+        <h1>خلصت اللعبة 😊</h1>
+        <p class="sub">عرفت عنك شوي… وحبّيت كل جواب 🙈<br>نكمّل الونسة عالراحة؟</p>
         <button class="again" onclick="restart()">نلعب كمان مرة 🔁</button>
       </div>
     </div>
@@ -226,53 +235,84 @@
      type 'choice' : أسئلة عنها تكشف تفكيرها بمحمد (كل خيار ينسجّل)
      type 'yesno'  : أسئلة حلوة، «نعم» بس، وزر «لأ» بيهرب ومحمد بيزعل  */
   const questions = [
-    { type:"choice", emoji:"👀", q:"بصراحة… حسّيتي حدا بيطالعك أكتر من اللازم؟",
-      sub:"بينا وبينك 😏",
+    { type:"choice", emoji:"😊", q:"شو بيخليكي ترتاحي لحدا بسرعة؟",
+      sub:"عشان أعرفك أكتر.",
       options:[
-        {t:"يمكن 🙈",ok:true},{t:"بحسّها بس بتجاهل",ok:true},
-        {t:"خبّرني مين 😏",ok:true},{t:"لأ ولا مرة",ok:false}
+        {t:"صدقه",ok:true},{t:"خفة دمه",ok:true},
+        {t:"اهتمامه",ok:true},{t:"هدوءه",ok:true}
       ] },
 
-    { type:"choice", emoji:"🔥", q:"شو أول إشي بيوقّعك بحدا؟",
-      sub:"كوني صريحة 😌",
+    { type:"choice", emoji:"✈️", q:"لو ربحتي تذكرة سفر بكرة الصبح… وين بتروحي؟",
+      sub:"اختاري بسرعة 😄",
       options:[
-        {t:"النظرة 👀",ok:true},{t:"الضحكة",ok:true},
-        {t:"الثقة بنفسه",ok:true},{t:"الغموض 🖤",ok:true}
+        {t:"مادبا",ok:true},{t:"لقلبي 🤍",ok:true},
+        {t:"جزيرة معزولة 🏝️",ok:true},{t:"اكتبيها ✍️",open:true}
       ] },
 
-    { type:"choice", emoji:"😏", q:"لو حدا غازلك بذكاء… شو رد فعلك؟",
-      sub:"لا تكذبي 🙊",
+    { type:"choice", emoji:"☕", q:"لو طلعنا نتقهوى… شو أجواءك؟",
+      sub:"تخيّلي بس 🙂",
       options:[
-        {t:"بتكسّف بس بيعجبني 🙈",ok:true},{t:"بردّ عليه أذكى",ok:true},
-        {t:"بتجاهل بدلع",ok:true},{t:"بنرفز 🙄",ok:false}
+        {t:"قهوة وحكي طويل",ok:true},{t:"مشوار وموسيقى 🎶",ok:true},
+        {t:"أكل ومسخرة",ok:true},{t:"مكان هادي 🌙",ok:true}
       ] },
 
-    { type:"choice", emoji:"👑", q:"إنتي من النوع اللي بيدلّع… ولا بيخلّي الواحد يستنّى؟",
-      sub:"سؤال خطير 😅",
+    { type:"choice", emoji:"💘", q:"شو أكتر إشي بيكسب قلبك بشخص؟",
+      sub:"بصراحة 🤍",
       options:[
-        {t:"بدلّع 👑",ok:true},{t:"بخلّيه يستنّى 😌",ok:true},
-        {t:"حسب الشخص",ok:true},{t:"الاثنين مع بعض 😏",ok:true}
+        {t:"حس الفكاهة",ok:true},{t:"الذكاء",ok:true},
+        {t:"الطيبة",ok:true},{t:"اكتبيها ✍️",open:true}
       ] },
 
-    { type:"choice", emoji:"💬", q:"بتحبي الواحد يبوح صريح… ولا يخلّيكي تحزري؟",
-      sub:"عشان أعرف كيف ألعبها 😏",
+    { type:"choice", emoji:"🙃", q:"بتعتبري حالك سهلة القراءة… ولا لغز؟",
+      sub:"سؤال بسيط 😌",
       options:[
-        {t:"يخلّيني أحزّر 😏",ok:true},{t:"صريح ومباشر",ok:true},
-        {t:"شوي شوي",ok:true},{t:"ما بحب الاثنين 🙄",ok:false}
+        {t:"لغز 🙈",ok:true},{t:"كتاب مفتوح",ok:true},
+        {t:"حسب الشخص",ok:true},{t:"اكتشفني بنفسك 😌",ok:true}
       ] },
 
-    { type:"choice", emoji:"🤫", q:"لو خيّرتك… أغازلك قدّام الكل، ولا بالسر بيناتنا؟",
-      sub:"اختاري بحكمة 😌",
+    { type:"choice", emoji:"🔮", q:"شو بتختاري؟",
+      sub:"لو كان بإيدك 😌",
       options:[
-        {t:"بالسر 🙈",ok:true},{t:"قدّام الكل 😎",ok:true},
-        {t:"فاجئني",ok:true},{t:"ولا وحدة 🙅",ok:false}
+        {t:"تعرفي شو بيفكّروا الناس فيكي",ok:true},{t:"تعرفي المستقبل",ok:true},
+        {t:"ترجعي بالزمن",ok:true},{t:"اكتبيها ✍️",open:true}
       ] },
 
-    { type:"yesno", emoji:"😉", q:"لو قلتلك إنه في حدا بيحسبلك ألف حساب… بتصدّقي؟",
-      sub:"ومش لازم أقول مين 🤫", yes:"بصدّق 🙈", no:"لأ" },
+    { type:"choice", emoji:"💬", q:"لو حدا بيهمّه أمرك… بتحبي يبيّنها كيف؟",
+      sub:"بصراحة صغيرة 🤍",
+      options:[
+        {t:"بكلام حلو ولطيف",ok:true},{t:"بالأفعال أكتر",ok:true},
+        {t:"شوي شوي على مهل",ok:true},{t:"ما بحب حدا يهتم 🙄",ok:false}
+      ] },
 
-    { type:"yesno", emoji:"🌙", q:"نكمّل اللعبة على الخاص… بمود أهدى؟",
-      sub:"صار في أسئلة ما بتنكتب هون 😏", yes:"يلا 😏", no:"لأ" }
+    { type:"choice", emoji:"😤", q:"أكتر إشي بيعصّبك منّي؟",
+      sub:"قوليها بلا زعل 😄",
+      options:[
+        {t:"إنك بتغزّل كتير 😏",ok:true},{t:"إنك بتردّ متأخر",ok:true},
+        {t:"لا شي… بتعجبني هيك 🙈",ok:true},{t:"اكتبيها ✍️",open:true}
+      ] },
+
+    { type:"yesno", emoji:"😄", q:"لو حكيتلك نكتة بايخة… بتضحكيلي مجاملة؟",
+      sub:"كوني صادقة 😅", yes:"بضحكلك 😄", no:"لأ" },
+
+    { type:"choice", emoji:"🌟", q:"شو بيوصل لقلبك أكتر؟",
+      sub:"بينا وبينك.",
+      options:[
+        {t:"الاهتمام الصادق",ok:true},{t:"الكلام الحلو",ok:true},
+        {t:"الأفعال",ok:true},{t:"خلّيني أشوف 😊",ok:true}
+      ] },
+
+    { type:"text", emoji:"🎵", q:"الأغنية اللي بتوصف مزاجك هالفترة؟",
+      sub:"اكتبيلي اسمها 🎧", placeholder:"اسم الأغنية…", send:"هي 🎶" },
+
+    { type:"choice", emoji:"🎁", q:"لو حدا حبّ يفرّح يومك بإشي صغير…",
+      sub:"إشي بسيط بس 🤍",
+      options:[
+        {t:"رسالة حلوة الصبح 💌",ok:true},{t:"قهوتك المفضلة ☕",ok:true},
+        {t:"ورد 🌷",ok:true},{t:"مش ناقصة إشي 🙅",ok:false}
+      ] },
+
+    { type:"yesno", emoji:"🤍", q:"نكمّل نحكي ونتعرّف… عالراحة؟",
+      sub:"إنتي بتحدّدي الإيقاع.", yes:"يلا", no:"لأ" }
   ];
 
   const stepsEl=document.getElementById('steps');
@@ -286,20 +326,46 @@
 
   questions.forEach(()=>{const p=document.createElement('div');p.className='pip';progressEl.appendChild(p);});
 
+  function attachWrite(box, i, q){
+    const inp=box.querySelector('.wtext'), btn=box.querySelector('.wsend');
+    const submit=()=>{
+      const val=inp.value.trim();
+      if(!val){ inp.focus(); box.classList.add('shake'); setTimeout(()=>box.classList.remove('shake'),400); return; }
+      log('answer',{qIndex:i, q, choice:val, open:true});
+      show(i+1);
+    };
+    btn.addEventListener('click',submit);
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();submit();} });
+  }
+
   questions.forEach((item,i)=>{
     const s=document.createElement('div');
     s.className='screen';s.dataset.i=i;
+
     if(item.type==='choice'){
-      const opts=item.options.map(o=>
-        `<button class="opt${o.ok?'':' bad'}" data-t="${o.t}">${o.t}</button>`).join('');
+      const opts=item.options.map(o=>{
+        const cls=o.open?'opt open':(o.ok?'opt':'opt bad');
+        return `<button class="${cls}" data-t="${o.t}"${o.open?' data-open="1"':''}>${o.t}</button>`;
+      }).join('');
       s.innerHTML=`
         <div class="emoji">${item.emoji}</div>
         <h1>${item.q}</h1>
         <p class="sub">${item.sub}</p>
-        <div class="opts">${opts}</div>`;
+        <div class="opts">${opts}</div>
+        <div class="writebox" hidden>
+          <input class="wtext" type="text" placeholder="اكتبي هون…" maxlength="120" />
+          <button class="wsend">إرسال</button>
+        </div>`;
       stepsEl.appendChild(s);
+      const writebox=s.querySelector('.writebox');
       s.querySelectorAll('.opt').forEach(b=>{
-        if(b.classList.contains('bad')){
+        if(b.dataset.open){
+          b.addEventListener('click',()=>{
+            s.querySelector('.opts').style.display='none';
+            writebox.hidden=false;
+            writebox.querySelector('.wtext').focus();
+          });
+        }else if(b.classList.contains('bad')){
           setupNo(b, i, b.dataset.t);        // dodges + محمد يزعل
         }else{
           b.addEventListener('click',()=>{
@@ -308,6 +374,20 @@
           });
         }
       });
+      attachWrite(writebox, i, item.q);
+
+    }else if(item.type==='text'){
+      s.innerHTML=`
+        <div class="emoji">${item.emoji}</div>
+        <h1>${item.q}</h1>
+        <p class="sub">${item.sub}</p>
+        <div class="writebox">
+          <input class="wtext" type="text" placeholder="${item.placeholder||'اكتبي هون…'}" maxlength="120" />
+          <button class="wsend">${item.send||'إرسال'}</button>
+        </div>`;
+      stepsEl.appendChild(s);
+      attachWrite(s.querySelector('.writebox'), i, item.q);
+
     }else{
       s.innerHTML=`
         <div class="emoji">${item.emoji}</div>

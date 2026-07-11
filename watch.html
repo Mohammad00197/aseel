@@ -98,7 +98,7 @@
   const feed=document.getElementById('feed');
   const meta={
     start:{ic:'🚀',bg:'start',t:'أسيل بدأت'},
-    answer:{ic:'💬',bg:'answer',t:'اختارت'},
+    answer:{ic:'💬',bg:'answer',t:'جاوبت'},
     yes:{ic:'💗',bg:'yes',t:'قالت نعم'},
     no_attempt:{ic:'🙈',bg:'no_attempt',t:'حاولت تضغط لأ'},
     avoid:{ic:'🫣',bg:'no_attempt',t:'حاولت تختار جواب هرب منها'},
@@ -116,7 +116,7 @@
     if(e.type==='no_attempt'||e.type==='avoid') document.getElementById('cNo').textContent=++no;
     let detail='';
     if(e.type==='yes'&&e.q) detail=e.q;
-    else if(e.type==='answer') detail=(e.choice||'')+(e.q?' — '+e.q:'');
+    else if(e.type==='answer') detail=(e.open?'✍️ ':'')+(e.choice||'')+(e.q?' — '+e.q:'');
     else if(e.type==='avoid') detail='«'+(e.choice||'')+'» (محاولة '+(e.attempt||1)+')';
     else if(e.type==='no_attempt') detail='محاولة رقم '+(e.attempt||1);
     const row=document.createElement('div');
