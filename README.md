@@ -4,8 +4,9 @@
 
 A calm mobile-first Arabic page: a friendly intro, then a few gentle, low-pressure questions. The **No** button dodges, the **Mohammad** avatar reacts (angry face + speech bubble on every No attempt), and everything is logged **live** to Firebase.
 
-## الصفحتان / Two pages
-- **`index.html`** — صفحة أسيل (the page she opens).
+## الصفحات / Pages
+- **`index.html`** — صفحة أسيل: لعبة الأسئلة (the questions game).
+- **`play.html`** — منطقة الألعاب: عجلة حظ + لعبة ذاكرة + بطاقة حظ (mini arcade: spin wheel, memory match, fortune card).
 - **`watch.html`** — لوحة محمد المباشرة (Mohammad's live dashboard).
 
 ## المميزات / Features

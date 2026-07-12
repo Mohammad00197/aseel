@@ -98,9 +98,11 @@
   const feed=document.getElementById('feed');
   const meta={
     start:{ic:'🚀',bg:'start',t:'أسيل بدأت'},
-    scratch_start:{ic:'🎁',bg:'start',t:'أسيل فتحت الكشط'},
-    scratch:{ic:'🪙',bg:'answer',t:'كشطت'},
-    scratch_done:{ic:'🎉',bg:'final',t:'خلّصت كل البطاقات 🤍'},
+    arcade_start:{ic:'🎮',bg:'start',t:'أسيل دخلت منطقة الألعاب'},
+    wheel_spin:{ic:'🎡',bg:'answer',t:'لفّت العجلة'},
+    memory_done:{ic:'🧠',bg:'answer',t:'خلّصت الذاكرة'},
+    fortune_pick:{ic:'🃏',bg:'answer',t:'اختارت بطاقة الحظ'},
+    arcade_done:{ic:'🏆',bg:'final',t:'خلّصت كل الألعاب!'},
     answer:{ic:'💬',bg:'answer',t:'جاوبت'},
     yes:{ic:'💗',bg:'yes',t:'قالت نعم'},
     no_attempt:{ic:'🙈',bg:'no_attempt',t:'حاولت تضغط لأ'},
@@ -119,7 +121,10 @@
     if(e.type==='no_attempt'||e.type==='avoid') document.getElementById('cNo').textContent=++no;
     let detail='';
     if(e.type==='yes'&&e.q) detail=e.q;
-    else if(e.type==='scratch') detail=e.card||'';
+    else if(e.type==='wheel_spin') detail='لفّة '+(e.spin||1)+' → '+(e.prize||'');
+    else if(e.type==='memory_done') detail=(e.seconds||'?')+' ثانية بـ'+(e.moves||'?')+' حركة';
+    else if(e.type==='fortune_pick') detail=e.msg||('بطاقة '+(e.card||''));
+    else if(e.type==='arcade_done') detail=(e.wheel?('🎡 '+e.wheel):'')+(e.memory?(' · 🧠 '+e.memory):'');
     else if(e.type==='answer') detail=(e.open?'✍️ ':'')+(e.choice||'')+(e.q?' — '+e.q:'');
     else if(e.type==='avoid') detail='«'+(e.choice||'')+'» (محاولة '+(e.attempt||1)+')';
     else if(e.type==='no_attempt') detail='محاولة رقم '+(e.attempt||1);
