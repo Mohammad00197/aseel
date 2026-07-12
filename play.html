@@ -146,7 +146,7 @@
       <!-- 1: wheel -->
       <div id="g-wheel" class="screen">
         <h1>🎡 عجلة الحظ</h1>
-        <p class="sub">لفّيها… وشو ما طلع، إلك عليّي.</p>
+        <p class="sub">الجوائز سرّية… لفّي واكتشفي 😏</p>
         <div class="wheelwrap">
           <div class="pointer">🔻</div>
           <div class="wheel" id="wheel"></div>
@@ -175,7 +175,7 @@
       <!-- 3: fortune -->
       <div id="g-fortune" class="screen">
         <h1>🃏 بطاقة الحظ</h1>
-        <p class="sub">وحدة من الثلاثة… إنتي وحظك.</p>
+        <p class="sub">كل بطاقة فيها مبلغ حقيقي… إنتي وحظك 💸</p>
         <div class="fcards" id="fCards">
           <button class="fcard"><span class="inner"><span class="f">✦</span><span class="b">🌞</span></span></button>
           <button class="fcard"><span class="inner"><span class="f">✦</span><span class="b">☕</span></span></button>
@@ -238,22 +238,23 @@
 
   /* ============ 1) WHEEL ============ */
   const PRIZES=[
-    {t:'قهوة عليّي ☕', c:'#c9698a'},
-    {t:'أغنية بختارها إلك 🎧', c:'#a84a6d'},
-    {t:'سؤال إلك عليّي 💬', c:'#d98cae'},
-    {t:'حلو من اختيارك 🍫', c:'#b5537b'},
-    {t:'نكتة… مضمونة السوء 😅', c:'#e0a3bd'},
-    {t:'مشوار قهوة مع محمد ☕', c:'#8e3a5c'}
+    {t:'بوسة عالخد 😚', c:'#c9698a'},
+    {t:'بوسة عالجبين 🤍', c:'#a84a6d'},
+    {t:'بوسة طايرة من بعيد 😘', c:'#d98cae'},
+    {t:'بوسة عالإيد… احترام 🎩', c:'#b5537b'},
+    {t:'بوسة مؤجّلة… لوقتها الصح 😌', c:'#e0a3bd'},
+    {t:'بوسة من اختيارك 😏', c:'#8e3a5c'}
   ];
   const wheel=document.getElementById('wheel');
   const SLICE=360/PRIZES.length;
   // paint slices
   wheel.style.background=`conic-gradient(${PRIZES.map((p,i)=>`${p.c} ${i*SLICE}deg ${(i+1)*SLICE}deg`).join(',')})`;
-  // labels
+  // labels: prizes are secret — every slice shows only "؟"
   PRIZES.forEach((p,i)=>{
     const l=document.createElement('div'); l.className='slice-label';
     l.style.transform=`rotate(${i*SLICE+SLICE/2}deg) translateY(-96px)`;
-    l.textContent=p.t.replace(' مع محمد',''); // keep labels short on the wheel
+    l.style.fontSize='26px';
+    l.textContent='؟';
     wheel.appendChild(l);
   });
   let spins=0, spinning=false, curRot=0;
@@ -347,9 +348,9 @@
 
   /* ============ 3) FORTUNE ============ */
   const FORTUNES=[
-    {ic:'🌞', msg:'توقعات الأسبوع: رسالة صباح حلوة… رح توصلك من مجهول (مش كتير مجهول) 💌'},
-    {ic:'☕', msg:'البطاقة بتقول: قهوتك الجاية مدفوعة… بشرط تنشربي مش لحالك'},
-    {ic:'😄', msg:'حظك اليوم: حدا ناوي يضحّكك لليوم ما بعده… استعدي'}
+    {ic:'💰', amount:'١٠ دنانير', msg:'ربحتي ١٠ دنانير 💰 … التحصيل من محمد، شخصيًا وبالإيد'},
+    {ic:'💵', amount:'٥ دنانير', msg:'٥ دنانير إلك 💵 … بتنقبض مع أول قهوة'},
+    {ic:'🪙', amount:'دينارين', msg:'دينارين 🪙 … المبلغ رمزي، بس القعدة اللي معهم مش رمزية'}
   ];
   let fPicked=false;
   document.querySelectorAll('.fcard').forEach((c,i)=>{
@@ -359,7 +360,7 @@
       c.classList.add('flip');
       document.querySelectorAll('.fcard').forEach(o=>{ if(o!==c) o.classList.add('dim'); });
       const f=FORTUNES[i];
-      summary.fortune=f.ic;
+      summary.fortune=f.amount;
       setTimeout(()=>{
         const m=document.getElementById('fMsg');
         m.textContent=f.msg; m.classList.add('show');
@@ -373,7 +374,7 @@
   document.getElementById('fNext').addEventListener('click',()=>{
     document.getElementById('sumWheel').textContent=summary.wheel||'—';
     document.getElementById('sumMemory').textContent=summary.memory||'—';
-    document.getElementById('sumFortune').textContent=(summary.fortune||'')+' مختارة بعناية';
+    document.getElementById('sumFortune').textContent=summary.fortune||'—';
     setLive('الألعاب: خلّصت 🏆'); face.textContent='😍'; faceSub.textContent='بطلة 🏆';
     goto('end',3);
     celebrate();
