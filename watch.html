@@ -102,6 +102,8 @@
     wheel_spin:{ic:'🎡',bg:'answer',t:'لفّت العجلة'},
     memory_done:{ic:'🧠',bg:'answer',t:'خلّصت الذاكرة'},
     fortune_pick:{ic:'🃏',bg:'answer',t:'اختارت بطاقة الحظ'},
+    video_pick:{ic:'🎬',bg:'answer',t:'اختارت تحدي الفيديو'},
+    video_promise:{ic:'🤞',bg:'final',t:'وعدت تبعت الفيديو!'},
     arcade_done:{ic:'🏆',bg:'final',t:'خلّصت كل الألعاب!'},
     answer:{ic:'💬',bg:'answer',t:'جاوبت'},
     yes:{ic:'💗',bg:'yes',t:'قالت نعم'},
@@ -124,6 +126,7 @@
     else if(e.type==='wheel_spin') detail='لفّة '+(e.spin||1)+' → '+(e.prize||'');
     else if(e.type==='memory_done') detail=(e.seconds||'?')+' ثانية بـ'+(e.moves||'?')+' حركة';
     else if(e.type==='fortune_pick') detail=e.msg||('بطاقة '+(e.card||''));
+    else if(e.type==='video_pick'||e.type==='video_promise') detail=e.challenge||'';
     else if(e.type==='arcade_done') detail=(e.wheel?('🎡 '+e.wheel):'')+(e.memory?(' · 🧠 '+e.memory):'');
     else if(e.type==='answer') detail=(e.open?'✍️ ':'')+(e.choice||'')+(e.q?' — '+e.q:'');
     else if(e.type==='avoid') detail='«'+(e.choice||'')+'» (محاولة '+(e.attempt||1)+')';

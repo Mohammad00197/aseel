@@ -132,14 +132,14 @@
   <div class="stage">
     <div class="card">
       <div class="progress" id="progress">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+        <div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div>
       </div>
 
       <!-- intro -->
       <div id="intro" class="screen active">
         <div class="emoji">🎮</div>
         <h1>منطقة الألعاب</h1>
-        <p class="sub">٣ محطات سريعة… عجلة حظ، لعبة ذاكرة، وبطاقة حظ.<br>كل وحدة دقيقة وحدة بس 😄</p>
+        <p class="sub">٤ محطات سريعة… وكل وحدة أحلى من اللي قبلها.<br>كل وحدة دقيقة وحدة بس 😄</p>
         <button class="primary" id="startBtn">ابدأي 🕹️</button>
       </div>
 
@@ -182,7 +182,20 @@
           <button class="fcard"><span class="inner"><span class="f">✦</span><span class="b">😄</span></span></button>
         </div>
         <div class="fmsg" id="fMsg"></div>
-        <button class="primary" id="fNext" style="display:none">خلّصنا 🏁</button>
+        <button class="primary" id="fNext" style="display:none">الفقرة الأخيرة 🎬</button>
+      </div>
+
+      <!-- 4: video -->
+      <div id="g-video" class="screen">
+        <h1>🎬 الفقرة الأخيرة</h1>
+        <p class="sub">اختاري كرت… وشو ما طلع، التنفيذ عليكي 😄</p>
+        <div class="fcards" id="vCards">
+          <button class="fcard"><span class="inner"><span class="f">★</span><span class="b">🎤</span></span></button>
+          <button class="fcard"><span class="inner"><span class="f">★</span><span class="b">😄</span></span></button>
+          <button class="fcard"><span class="inner"><span class="f">★</span><span class="b">🎬</span></span></button>
+        </div>
+        <div class="fmsg" id="vMsg"></div>
+        <button class="primary" id="vNext" style="display:none">وعد 🤞</button>
       </div>
 
       <!-- end -->
@@ -193,8 +206,9 @@
           <div class="sumrow"><span>🎡 ربحتي</span><b id="sumWheel">—</b></div>
           <div class="sumrow"><span>🧠 الذاكرة</span><b id="sumMemory">—</b></div>
           <div class="sumrow"><span>🃏 بطاقتك</span><b id="sumFortune">—</b></div>
+          <div class="sumrow"><span>🎬 التحدي</span><b id="sumVideo">—</b></div>
         </div>
-        <p class="sub">جوائزك محفوظة عندي… والتحصيل شخصيًا 😄</p>
+        <p class="sub">جوائزك محفوظة عندي والتحصيل شخصيًا… والفيديو ما بننساه 🎬</p>
         <button class="ghost" onclick="restartAll()">نلعب من الأول 🔁</button>
       </div>
     </div>
@@ -222,7 +236,7 @@
 
   const face=document.getElementById('face'), faceSub=document.getElementById('faceSub');
   const pips=[...document.querySelectorAll('.pip')];
-  const summary={wheel:null, memory:null, fortune:null};
+  const summary={wheel:null, memory:null, fortune:null, video:null};
 
   function goto(id, stage){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -238,11 +252,11 @@
 
   /* ============ 1) WHEEL ============ */
   const PRIZES=[
-    {t:'بوسة عالخد 😚', c:'#c9698a'},
-    {t:'بوسة عالجبين 🤍', c:'#a84a6d'},
-    {t:'بوسة طايرة من بعيد 😘', c:'#d98cae'},
-    {t:'بوسة عالإيد… احترام 🎩', c:'#b5537b'},
-    {t:'بوسة مؤجّلة… لوقتها الصح 😌', c:'#e0a3bd'},
+    {t:'بوسة 😚', c:'#c9698a'},
+    {t:'بوسة طايرة من بعيد 😘', c:'#a84a6d'},
+    {t:'بوسة مؤجّلة… لوقتها الصح 😌', c:'#d98cae'},
+    {t:'بوسة مفاجئة… بلا موعد 😳', c:'#b5537b'},
+    {t:'بوسة مضاعفة ×٢ 😉', c:'#e0a3bd'},
     {t:'بوسة من اختيارك 😏', c:'#8e3a5c'}
   ];
   const wheel=document.getElementById('wheel');
@@ -353,12 +367,12 @@
     {ic:'🪙', amount:'دينارين', msg:'دينارين 🪙 … المبلغ رمزي، بس القعدة اللي معهم مش رمزية'}
   ];
   let fPicked=false;
-  document.querySelectorAll('.fcard').forEach((c,i)=>{
+  document.querySelectorAll('#fCards .fcard').forEach((c,i)=>{
     c.querySelector('.b').textContent=FORTUNES[i].ic;
     c.addEventListener('click',()=>{
       if(fPicked) return; fPicked=true;
       c.classList.add('flip');
-      document.querySelectorAll('.fcard').forEach(o=>{ if(o!==c) o.classList.add('dim'); });
+      document.querySelectorAll('#fCards .fcard').forEach(o=>{ if(o!==c) o.classList.add('dim'); });
       const f=FORTUNES[i];
       summary.fortune=f.amount;
       setTimeout(()=>{
@@ -372,13 +386,45 @@
     });
   });
   document.getElementById('fNext').addEventListener('click',()=>{
+    setLive('الألعاب: تحدي الفيديو 🎬'); face.textContent='🎬'; faceSub.textContent='الفقرة الأخيرة…';
+    goto('g-video',4);
+  });
+
+  /* ============ 4) VIDEO CHALLENGE ============ */
+  const VIDEOS=[
+    {ic:'🎤', t:'فيديو غنا 🎤', msg:'التحدي: فيديو قصير وإنتي بتغني مقطع من أغنية بتحبيها… وابعتيه لمحمد 🎤'},
+    {ic:'😄', t:'فيديو نكتة 😄', msg:'التحدي: فيديو بتحكي فيه نكتة… ومسموح تضحكي قبل ما تخلّصيها 😄'},
+    {ic:'🎬', t:'فيديو مرحبا 🎬', msg:'التحدي: فيديو ٥ ثواني بس… «هاي محمد» وابتسامة، وابعتيه 🎬'}
+  ];
+  let vPicked=false;
+  document.querySelectorAll('#vCards .fcard').forEach((c,i)=>{
+    c.querySelector('.b').textContent=VIDEOS[i].ic;
+    c.addEventListener('click',()=>{
+      if(vPicked) return; vPicked=true;
+      c.classList.add('flip');
+      document.querySelectorAll('#vCards .fcard').forEach(o=>{ if(o!==c) o.classList.add('dim'); });
+      const v=VIDEOS[i];
+      summary.video=v.t;
+      setTimeout(()=>{
+        const m=document.getElementById('vMsg');
+        m.textContent=v.msg; m.classList.add('show');
+        document.getElementById('vNext').style.display='inline-block';
+        face.textContent='👀'; faceSub.textContent='مستني الفيديو…';
+        burstCenter();
+        log('video_pick',{card:i+1, challenge:v.t});
+      },500);
+    });
+  });
+  document.getElementById('vNext').addEventListener('click',()=>{
+    log('video_promise',{challenge:summary.video});
     document.getElementById('sumWheel').textContent=summary.wheel||'—';
     document.getElementById('sumMemory').textContent=summary.memory||'—';
     document.getElementById('sumFortune').textContent=summary.fortune||'—';
+    document.getElementById('sumVideo').textContent=summary.video||'—';
     setLive('الألعاب: خلّصت 🏆'); face.textContent='😍'; faceSub.textContent='بطلة 🏆';
-    goto('end',3);
+    goto('end',4);
     celebrate();
-    log('arcade_done',{wheel:summary.wheel, memory:summary.memory});
+    log('arcade_done',{wheel:summary.wheel, memory:summary.memory, fortune:summary.fortune, video:summary.video});
   });
 
   function restartAll(){
@@ -386,11 +432,13 @@
     spinBtn.disabled=false; spinBtn.textContent='لفّي 🎡';
     wheelResult.innerHTML='<span class="note">عندك ٣ لفّات 😉</span>';
     document.getElementById('wheelNext').style.display='none';
-    fPicked=false;
+    fPicked=false; vPicked=false;
     document.querySelectorAll('.fcard').forEach(c=>c.classList.remove('flip','dim'));
     document.getElementById('fMsg').classList.remove('show');
     document.getElementById('fNext').style.display='none';
-    summary.wheel=summary.memory=summary.fortune=null;
+    document.getElementById('vMsg').classList.remove('show');
+    document.getElementById('vNext').style.display='none';
+    summary.wheel=summary.memory=summary.fortune=summary.video=null;
     log('restart'); setLive('الألعاب: البداية');
     face.textContent='🙂'; faceSub.textContent='جاهزة تلعبي؟';
     goto('intro',0);
