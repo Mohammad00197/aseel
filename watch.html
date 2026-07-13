@@ -131,10 +131,10 @@
     else if(e.type==='fortune_pick') detail=e.msg||('بطاقة '+(e.card||''));
     else if(e.type==='video_pick'||e.type==='video_promise') detail=e.challenge||'';
     else if(e.type==='round_result'){
-      const rn={reaction:'⚡ ردّة الفعل',taps:'👆 السرعة',timing:'🎯 التوقيت'};
-      detail=(rn[e.round]||e.round)+': '+(e.her||'')+' مقابل '+(e.him||'')+' — '+(e.winner==='aseel'?'إلها 😳':'لمحمد 😌');
+      const rn={reaction:'⚡ ردّة الفعل',taps:'👆 السرعة',timing:'🎯 التوقيت',eagle:'🔍 عين الصقر',simon:'🟪 الذاكرة'};
+      detail=(rn[e.round]||e.round)+': '+(e.her||'')+' مقابل '+(e.him||'')+' — '+(e.winner==='aseel'?'إلها':'لمحمد');
     }
-    else if(e.type==='challenge_done') detail=(e.her||0)+' - '+(e.him||0)+' → '+(e.winner==='aseel'?'أسيل غلبت 👑 (القهوة على محمد)':'محمد غلب 😎 (القهوة عليها)');
+    else if(e.type==='challenge_done') detail=(e.her||0)+' - '+(e.him||0)+' → '+(e.winner==='aseel'?'أسيل غلبت 👑 (الجائزة: فيديو)':'محمد غلب');
     else if(e.type==='arcade_done') detail=(e.wheel?('🎡 '+e.wheel):'')+(e.memory?(' · 🧠 '+e.memory):'');
     else if(e.type==='answer') detail=(e.open?'✍️ ':'')+(e.choice||'')+(e.q?' — '+e.q:'');
     else if(e.type==='avoid') detail='«'+(e.choice||'')+'» (محاولة '+(e.attempt||1)+')';

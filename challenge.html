@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>تحدي محمد ⚡</title>
+<title>تحدي محمد</title>
 <style>
   :root{
     --bg1:#f7efe8; --bg2:#efe3f0; --ink:#3b2f3a; --muted:#8a7d86;
@@ -40,8 +40,8 @@
   .card{background:var(--card);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.6);border-radius:30px;padding:26px 20px 24px;box-shadow:var(--shadow);text-align:center;position:relative;overflow:hidden}
   .card::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 50% -10%, rgba(255,255,255,.7), transparent 60%);pointer-events:none}
 
-  .progress{display:flex;gap:8px;justify-content:center;margin-bottom:16px}
-  .pip{width:26px;height:5px;border-radius:99px;background:#00000015;transition:.4s}
+  .progress{display:flex;gap:7px;justify-content:center;margin-bottom:16px}
+  .pip{width:22px;height:5px;border-radius:99px;background:#00000015;transition:.4s}
   .pip.on{background:var(--accent)}
 
   .screen{display:none;animation:fadeUp .5s cubic-bezier(.2,.8,.2,1) both}
@@ -50,8 +50,8 @@
 
   .emoji{font-size:44px;margin-bottom:8px;display:inline-block;animation:pop .6s cubic-bezier(.2,1.4,.4,1) both}
   @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
-  h1{font-size:21px;line-height:1.6;margin:4px 4px 6px;font-weight:800}
-  .sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin:0 2px 18px}
+  h1{font-size:20px;line-height:1.6;margin:4px 4px 6px;font-weight:800}
+  .sub{color:var(--muted);font-size:13.5px;line-height:1.7;margin:0 2px 16px}
   .stake{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px dashed var(--accent);color:var(--accent-deep);
     font-size:13.5px;font-weight:800;border-radius:999px;padding:9px 16px;margin-bottom:18px}
 
@@ -60,11 +60,10 @@
   .primary{background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:#fff;box-shadow:0 12px 24px -8px rgba(168,74,109,.7)}
   .ghost{background:transparent;color:var(--accent-deep);font-size:13px;text-decoration:underline;padding:8px}
 
-  .bench{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12.5px;color:var(--muted);margin-bottom:12px}
+  .bench{font-size:12.5px;color:var(--muted);margin-bottom:12px}
   .bench b{color:var(--accent-deep)}
 
-  /* play pad */
-  .pad{height:210px;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  .pad{height:200px;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
     font-size:19px;font-weight:800;color:#fff;cursor:pointer;margin-bottom:12px;
     background:linear-gradient(135deg,#d98cae,#a84a6d);box-shadow:0 14px 30px -18px rgba(120,60,90,.7);
     transition:background .15s ease, transform .1s ease}
@@ -75,16 +74,30 @@
   .pad.off{pointer-events:none;opacity:.9}
   .trials{display:flex;gap:8px;justify-content:center;min-height:26px;margin-bottom:6px}
   .trial{background:#fff;border-radius:99px;padding:4px 12px;font-size:12.5px;font-weight:800;color:var(--accent-deep);box-shadow:0 4px 10px -6px rgba(120,60,90,.4)}
-
-  .bignum{font-size:40px;font-weight:900;color:var(--accent-deep);line-height:1.1}
+  .bignum{font-size:40px;font-weight:900;color:#fff;line-height:1.1}
   .timerline{font-size:13px;color:var(--muted);margin-bottom:8px}
 
-  /* timing bar */
   .track{position:relative;height:46px;border-radius:14px;background:#fff;overflow:hidden;margin-bottom:14px;box-shadow:inset 0 0 0 1px #00000010}
   .zone{position:absolute;top:0;bottom:0;left:50%;width:14%;transform:translateX(-50%);background:rgba(46,158,107,.18);border-inline:2px solid rgba(46,158,107,.45)}
   .marker{position:absolute;top:4px;bottom:4px;width:10px;border-radius:6px;background:var(--accent-deep);left:0}
 
-  /* round result */
+  /* eagle eye grid */
+  .egrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;max-width:320px;margin:0 auto 12px}
+  .etile{aspect-ratio:1;border:none;border-radius:11px;background:#fff;font-size:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 5px 12px -8px rgba(120,60,90,.4);transition:transform .1s}
+  .etile:active{transform:scale(.92)}
+  .etile.wrong{animation:shake .3s ease;background:#ffe3e3}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+  .elevel{font-size:12.5px;color:var(--muted);margin-bottom:8px}
+
+  /* simon */
+  .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px;max-width:270px;margin:0 auto 12px}
+  .spad{aspect-ratio:1;border:none;border-radius:18px;cursor:pointer;opacity:.55;transition:opacity .12s, transform .1s;box-shadow:0 8px 18px -12px rgba(0,0,0,.35)}
+  .spad:active{transform:scale(.95)}
+  .spad.lit{opacity:1;transform:scale(1.04)}
+  .spad.locked{pointer-events:none}
+  .s0{background:#c9698a}.s1{background:#e2b04c}.s2{background:#43bb80}.s3{background:#7b6cc9}
+  .slevel{font-size:13px;font-weight:800;color:var(--accent-deep);margin-bottom:10px;min-height:20px}
+
   .vs{display:flex;gap:10px;justify-content:center;margin:10px 0 12px}
   .vsbox{flex:1;max-width:150px;background:#fff;border-radius:16px;padding:12px 8px;box-shadow:0 8px 18px -14px rgba(120,60,90,.5)}
   .vsbox .who{font-size:12px;color:var(--muted);margin-bottom:4px}
@@ -97,9 +110,11 @@
   #final .big{font-size:52px;animation:beat 1.1s ease-in-out infinite}
   @keyframes beat{0%,100%{transform:scale(1)}20%{transform:scale(1.15)}40%{transform:scale(1)}}
   .scoreline{font-size:30px;font-weight:900;color:var(--accent-deep);margin:2px 0 10px}
-  .rounds{display:flex;flex-direction:column;gap:7px;margin:4px auto 14px;max-width:300px}
+  .rounds{display:flex;flex-direction:column;gap:7px;margin:4px auto 14px;max-width:310px}
   .rrow{display:flex;justify-content:space-between;gap:10px;background:#ffffffb8;border:1px solid #00000008;border-radius:12px;padding:9px 13px;font-size:13px}
   .rrow b.w{color:var(--good)} .rrow b.l{color:var(--bad)}
+  .prize{background:#fff;border:1.5px dashed var(--accent);border-radius:16px;padding:14px;margin:0 auto 14px;max-width:310px}
+  .prize .pt{font-size:14.5px;font-weight:800;color:var(--accent-deep);line-height:1.7}
   .foot{text-align:center;color:#9a8d96;font-size:12px;margin-top:14px;position:relative;z-index:2}
 
   .spark{position:fixed;pointer-events:none;font-size:20px;z-index:5;animation:fly 1.2s ease-out forwards;opacity:0}
@@ -120,23 +135,23 @@
   <div class="stage">
     <div class="card">
       <div class="progress" id="progress">
-        <div class="pip"></div><div class="pip"></div><div class="pip"></div>
+        <div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div><div class="pip"></div>
       </div>
 
       <!-- intro -->
       <div id="intro" class="screen active">
         <div class="emoji">⚡</div>
         <h1>تحدي محمد</h1>
-        <p class="sub">٣ جولات سرعة… أرقام محمد مسجّلة وجاهزة.<br>فكّك تغلبيه؟</p>
-        <div class="stake">☕ الرهان: الخسران بيدفع القهوة</div>
-        <div class="btns"><button class="primary" id="startBtn">قبلت التحدي 😤</button></div>
+        <p class="sub">٥ جولات. سكور محمد مسجّل… بينكشف بعد كل جولة.</p>
+        <div class="stake">الرهان: اللي يغلب إله جائزة</div>
+        <div><button class="primary" id="startBtn">قبلت التحدي</button></div>
       </div>
 
-      <!-- round 1: reaction -->
+      <!-- r1: reaction -->
       <div id="r1" class="screen">
-        <h1>⚡ الجولة ١ — ردّة الفعل</h1>
-        <div class="bench">سكور محمد: <b id="b1">…</b></div>
-        <div class="pad" id="rxPad"><span id="rxMain">اضغطي للبدء</span><small id="rxHint">لما يصير أخضر… اضغطي بأسرع ما فيكي (٣ محاولات)</small></div>
+        <h1>الجولة ١ — ردّة الفعل</h1>
+        <div class="bench">سكور محمد: <b>؟</b></div>
+        <div class="pad" id="rxPad"><span id="rxMain">اضغطي للبدء</span><small id="rxHint">لما يصير أخضر اضغطي بأسرع ما فيكي — ٣ محاولات</small></div>
         <div class="trials" id="rxTrials"></div>
         <div id="rxDone" hidden>
           <div class="vs">
@@ -144,99 +159,138 @@
             <div class="vsbox" id="rx-him"><div class="who">محمد</div><div class="val" id="rxHimVal">—</div></div>
           </div>
           <div class="verdict" id="rxVerdict"></div>
-          <button class="primary" id="rxNext">الجولة الجاية 👈</button>
+          <button class="primary" id="rxNext">الجولة الجاية</button>
         </div>
       </div>
 
-      <!-- round 2: tap sprint -->
+      <!-- r2: taps -->
       <div id="r2" class="screen">
-        <h1>👆 الجولة ٢ — السرعة</h1>
-        <div class="bench">سكور محمد: <b id="b2">…</b> ضغطة</div>
-        <div class="timerline">⏱️ <span id="tpTimer">7.0</span> ثانية</div>
-        <div class="pad" id="tpPad"><span class="bignum" id="tpCount">0</span><small>أول ضغطة بتشغّل العدّاد… اضغطي بجنون</small></div>
+        <h1>الجولة ٢ — السرعة</h1>
+        <div class="bench">سكور محمد: <b>؟</b></div>
+        <div class="timerline"><span id="tpTimer">7.0</span> ثانية</div>
+        <div class="pad" id="tpPad"><span class="bignum" id="tpCount">0</span><small>أول ضغطة بتشغّل العدّاد</small></div>
         <div id="tpDone" hidden>
           <div class="vs">
             <div class="vsbox" id="tp-her"><div class="who">إنتي</div><div class="val" id="tpHerVal">—</div></div>
             <div class="vsbox" id="tp-him"><div class="who">محمد</div><div class="val" id="tpHimVal">—</div></div>
           </div>
           <div class="verdict" id="tpVerdict"></div>
-          <button class="primary" id="tpNext">الجولة الأخيرة 👈</button>
+          <button class="primary" id="tpNext">الجولة الجاية</button>
         </div>
       </div>
 
-      <!-- round 3: timing -->
+      <!-- r3: timing -->
       <div id="r3" class="screen">
-        <h1>🎯 الجولة ٣ — التوقيت</h1>
-        <div class="bench">سكور محمد: <b id="b3">…</b>% عن المركز</div>
-        <p class="sub" style="margin-bottom:10px">وقّفي المؤشر بالمنطقة الخضرا… أقرب للنص = أحسن (٣ محاولات)</p>
+        <h1>الجولة ٣ — التوقيت</h1>
+        <div class="bench">سكور محمد: <b>؟</b></div>
+        <p class="sub" style="margin-bottom:10px">وقّفي المؤشر أقرب ما يكون للنص — ٣ محاولات</p>
         <div class="track"><div class="zone"></div><div class="marker" id="marker"></div></div>
         <div class="trials" id="tmTrials"></div>
-        <button class="primary" id="tmStop">وقّفي! 🎯</button>
+        <button class="primary" id="tmStop">وقّفي</button>
         <div id="tmDone" hidden>
           <div class="vs">
             <div class="vsbox" id="tm-her"><div class="who">إنتي</div><div class="val" id="tmHerVal">—</div></div>
             <div class="vsbox" id="tm-him"><div class="who">محمد</div><div class="val" id="tmHimVal">—</div></div>
           </div>
           <div class="verdict" id="tmVerdict"></div>
-          <button class="primary" id="tmNext">النتيجة 🏁</button>
+          <button class="primary" id="tmNext">الجولة الجاية</button>
+        </div>
+      </div>
+
+      <!-- r4: eagle eye -->
+      <div id="r4" class="screen">
+        <h1>الجولة ٤ — عين الصقر</h1>
+        <div class="bench">سكور محمد: <b>؟</b></div>
+        <div class="elevel">لاقي المختلف — <span id="eLvl">1</span> من ٣ · <span id="eTime">0.0</span> ث</div>
+        <div class="egrid" id="eGrid"></div>
+        <div id="eDone" hidden>
+          <div class="vs">
+            <div class="vsbox" id="e-her"><div class="who">إنتي</div><div class="val" id="eHerVal">—</div></div>
+            <div class="vsbox" id="e-him"><div class="who">محمد</div><div class="val" id="eHimVal">—</div></div>
+          </div>
+          <div class="verdict" id="eVerdict"></div>
+          <button class="primary" id="eNext">الجولة الأخيرة</button>
+        </div>
+      </div>
+
+      <!-- r5: simon -->
+      <div id="r5" class="screen">
+        <h1>الجولة ٥ — الذاكرة</h1>
+        <div class="bench">سكور محمد: <b>؟</b></div>
+        <div class="slevel" id="sMsg">راقبي الترتيب… وأعيديه</div>
+        <div class="sgrid" id="sGrid">
+          <button class="spad s0 locked"></button><button class="spad s1 locked"></button>
+          <button class="spad s2 locked"></button><button class="spad s3 locked"></button>
+        </div>
+        <button class="primary" id="sStart">ابدأي</button>
+        <div id="sDone" hidden>
+          <div class="vs">
+            <div class="vsbox" id="s-her"><div class="who">إنتي</div><div class="val" id="sHerVal">—</div></div>
+            <div class="vsbox" id="s-him"><div class="who">محمد</div><div class="val" id="sHimVal">—</div></div>
+          </div>
+          <div class="verdict" id="sVerdict"></div>
+          <button class="primary" id="sNext">النتيجة</button>
         </div>
       </div>
 
       <!-- final -->
       <div id="final" class="screen">
-        <div class="big" id="finBig">🏆</div>
-        <h1 id="finTitle">…</h1>
-        <div class="scoreline" id="finScore">0 - 0</div>
+        <div class="big">👑</div>
+        <h1 id="finTitle">غلبتيه</h1>
+        <div class="scoreline" id="finScore"></div>
         <div class="rounds" id="finRounds"></div>
-        <div class="stake" id="finStake">☕ …</div>
-        <div><button class="ghost" onclick="location.reload()">إعادة التحدي 🔁</button></div>
+        <div class="prize">
+          <div class="pt" id="prizeText">جائزتك: تبعتي فيديو إلك لمحمد</div>
+        </div>
+        <button class="primary" id="promiseBtn">حاضر</button>
+        <div><button class="ghost" onclick="location.reload()">إعادة التحدي</button></div>
       </div>
     </div>
-    <div class="foot">من غير زعل… الأرقام بتحكي ⚡</div>
+    <div class="foot"></div>
   </div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 <script>
   /* ---------- Firebase ---------- */
-  const M_MODE=new URLSearchParams(location.search).get('m')==='1';
   let db=null, evRef=null, meRef=null;
   try{
     firebase.initializeApp({databaseURL:"https://testin-a1b3c-default-rtdb.firebaseio.com", projectId:"testin-a1b3c"});
     db=firebase.database(); evRef=db.ref('events');
-    if(!M_MODE){
-      meRef=db.ref('presence/aseel');
-      meRef.onDisconnect().remove();
-      meRef.set({online:true, since:firebase.database.ServerValue.TIMESTAMP, current:'التحدي: البداية'});
-      db.ref('presence/mohammad').on('value',s=>{
-        const on=s.exists()&&s.val()&&s.val().online;
-        document.getElementById('watching').classList.toggle('on',!!on);
-      });
-    }
+    meRef=db.ref('presence/aseel');
+    meRef.onDisconnect().remove();
+    meRef.set({online:true, since:firebase.database.ServerValue.TIMESTAMP, current:'التحدي: البداية'});
+    db.ref('presence/mohammad').on('value',s=>{
+      const on=s.exists()&&s.val()&&s.val().online;
+      document.getElementById('watching').classList.toggle('on',!!on);
+    });
   }catch(e){ console.warn('firebase init failed', e); }
   const SESSION='s'+Math.random().toString(36).slice(2,9);
-  function log(type, extra){ if(!evRef||M_MODE) return; try{ evRef.push(Object.assign({type,session:SESSION,ts:firebase.database.ServerValue.TIMESTAMP}, extra||{})); }catch(e){} }
-  function setLive(c){ if(meRef&&!M_MODE){ try{ meRef.update({current:c, at:firebase.database.ServerValue.TIMESTAMP}); }catch(e){} } }
-
-  /* ---------- benchmark (mohammad's scores) ---------- */
-  let bench={reaction:315, taps:40, timing:11};
-  function renderBench(){
-    document.getElementById('b1').textContent=bench.reaction+' ms';
-    document.getElementById('b2').textContent=bench.taps;
-    document.getElementById('b3').textContent=bench.timing;
-  }
-  renderBench();
-  try{
-    db && db.ref('challenge/mohammad').once('value').then(s=>{
-      if(s.exists()){ bench=Object.assign(bench, s.val()); renderBench(); }
-    });
-  }catch(e){}
+  function log(type, extra){ if(!evRef) return; try{ evRef.push(Object.assign({type,session:SESSION,ts:firebase.database.ServerValue.TIMESTAMP}, extra||{})); }catch(e){} }
+  function setLive(c){ if(meRef){ try{ meRef.update({current:c, at:firebase.database.ServerValue.TIMESTAMP}); }catch(e){} } }
 
   const face=document.getElementById('face'), faceSub=document.getElementById('faceSub');
   const pips=[...document.querySelectorAll('.pip')];
-  const results={reaction:null, taps:null, timing:null};
   const wins={her:0, him:0};
   const roundLog=[];
+
+  /* ---------- rigged score engine ----------
+     mohammad "wins" exactly 2 random rounds of 5 — she always takes the match 3-2 */
+  const rand=(a,b)=>a+Math.random()*(b-a);
+  const ri=(a,b)=>Math.round(rand(a,b));
+  let himWins=new Set();
+  (function pick(){ while(himWins.size<2) himWins.add(Math.floor(Math.random()*5)); })();
+
+  function fakeScore(idx, key, her){
+    const w=himWins.has(idx); // should mohammad win this round?
+    let him;
+    if(key==='reaction'){ him = w ? Math.max(140, her-ri(25,90)) : her+ri(30,130); if(w&&him>=her) him=her-15; }
+    else if(key==='taps'){ him = w ? her+ri(2,5) : Math.max(3, her-ri(2,6)); if(!w&&him>her) him=her; }
+    else if(key==='timing'){ him = w ? Math.max(0, her-ri(2,7)) : her+ri(3,10); if(w&&him>=her) him=Math.max(0,her-1); }
+    else if(key==='eagle'){ him = w ? Math.max(1.5, +(her-rand(0.5,1.8)).toFixed(1)) : +(her+rand(0.6,2.4)).toFixed(1); if(w&&him>=her) him=+(her-0.3).toFixed(1); }
+    else if(key==='simon'){ him = w ? her+ri(1,2) : Math.max(0, her-ri(1,2)); if(!w&&him>her) him=her; }
+    return him;
+  }
 
   function goto(id, stage){
     document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -244,44 +298,45 @@
     pips.forEach((p,i)=>p.classList.toggle('on', i<stage));
   }
 
-  function roundResult(key, herVal, himVal, lowerWins, unit, ids){
-    const herWins = lowerWins ? herVal<=himVal : herVal>=himVal;
-    if(herWins) wins.her++; else wins.him++;
-    roundLog.push({key, her:herVal+unit, him:himVal+unit, herWins});
+  function roundResult(idx, key, herVal, lowerWins, unit, ids){
+    const himVal=fakeScore(idx, key, herVal);
+    const herWon = lowerWins ? herVal<=himVal : herVal>=himVal;
+    if(herWon) wins.her++; else wins.him++;
+    roundLog.push({key, her:herVal+unit, him:himVal+unit, herWon});
     document.getElementById(ids.herVal).textContent=herVal+unit;
     document.getElementById(ids.himVal).textContent=himVal+unit;
-    document.getElementById(ids.her).classList.toggle('win',herWins);
-    document.getElementById(ids.him).classList.toggle('win',!herWins);
+    document.getElementById(ids.her).classList.toggle('win',herWon);
+    document.getElementById(ids.him).classList.toggle('win',!herWon);
     const v=document.getElementById(ids.verdict);
-    v.textContent=herWins?'الجولة إلك 😳':'الجولة لمحمد 😌';
-    v.className='verdict '+(herWins?'w':'l');
-    face.textContent=herWins?'😳':'😏';
-    faceSub.textContent=herWins?'ما توقعتها':'قلتلك';
+    v.textContent=herWon?'الجولة إلك':'الجولة لمحمد';
+    v.className='verdict '+(herWon?'w':'l');
+    face.textContent=herWon?'😳':'😏';
+    faceSub.textContent=herWon?'ما توقعتها':'قلتلك';
     burstCenter();
-    log('round_result',{round:key, her:herVal+unit, him:himVal+unit, winner:herWins?'aseel':'mohammad'});
+    log('round_result',{round:key, her:herVal+unit, him:himVal+unit, winner:herWon?'aseel':'mohammad'});
   }
 
   document.getElementById('startBtn').addEventListener('click',()=>{
-    log('challenge_start'); setLive('التحدي: ردّة الفعل ⚡');
+    log('challenge_start'); setLive('التحدي: ردّة الفعل');
     goto('r1',1);
   });
 
-  /* ============ ROUND 1: reaction ============ */
+  /* ============ R1: reaction ============ */
   const rxPad=document.getElementById('rxPad'), rxMain=document.getElementById('rxMain'), rxHint=document.getElementById('rxHint');
   const rxTrials=document.getElementById('rxTrials');
   let rxState='idle', rxT0=0, rxTimes=[], rxTimer=null;
   rxPad.addEventListener('pointerdown',()=>{
     if(rxState==='idle'){
       rxState='wait'; rxPad.className='pad wait';
-      rxMain.textContent='استني…'; rxHint.textContent='أول ما يصير أخضر، اضغطي!';
+      rxMain.textContent='استني…'; rxHint.textContent='أول ما يصير أخضر، اضغطي';
       rxTimer=setTimeout(()=>{
         rxState='go'; rxPad.className='pad go';
-        rxMain.textContent='اضغطي!!'; rxHint.textContent='';
+        rxMain.textContent='اضغطي!'; rxHint.textContent='';
         rxT0=performance.now();
       }, 900+Math.random()*1800);
     }else if(rxState==='wait'){
       clearTimeout(rxTimer); rxState='idle'; rxPad.className='pad';
-      rxMain.textContent='بدري! 😅'; rxHint.textContent='اضغطي للمحاولة من جديد';
+      rxMain.textContent='بدري'; rxHint.textContent='اضغطي للمحاولة من جديد';
     }else if(rxState==='go'){
       const dt=Math.round(performance.now()-rxT0);
       rxTimes.push(dt);
@@ -289,20 +344,19 @@
       if(rxTimes.length>=3){
         rxState='done'; rxPad.classList.add('off');
         const avg=Math.round(rxTimes.reduce((a,b)=>a+b,0)/3);
-        results.reaction=avg;
         rxMain.textContent='متوسطك: '+avg+' ms'; rxHint.textContent='';
         document.getElementById('rxDone').hidden=false;
-        roundResult('reaction', avg, bench.reaction, true, ' ms',
+        roundResult(0,'reaction', avg, true, ' ms',
           {herVal:'rxHerVal',himVal:'rxHimVal',her:'rx-her',him:'rx-him',verdict:'rxVerdict'});
       }else{
         rxState='idle'; rxPad.className='pad';
-        rxMain.textContent=dt+' ms 🔥'; rxHint.textContent='اضغطي للمحاولة '+(rxTimes.length+1)+' من ٣';
+        rxMain.textContent=dt+' ms'; rxHint.textContent='المحاولة '+(rxTimes.length+1)+' من ٣';
       }
     }
   });
-  document.getElementById('rxNext').addEventListener('click',()=>{ setLive('التحدي: السرعة 👆'); goto('r2',2); });
+  document.getElementById('rxNext').addEventListener('click',()=>{ setLive('التحدي: السرعة'); goto('r2',2); });
 
-  /* ============ ROUND 2: tap sprint ============ */
+  /* ============ R2: taps ============ */
   const tpPad=document.getElementById('tpPad'), tpCount=document.getElementById('tpCount'), tpTimerEl=document.getElementById('tpTimer');
   let tpN=0, tpRunning=false, tpEnded=false, tpEndAt=0, tpTick=null;
   tpPad.addEventListener('pointerdown',()=>{
@@ -314,18 +368,17 @@
         tpTimerEl.textContent=left.toFixed(1);
         if(left<=0){
           clearInterval(tpTick); tpEnded=true; tpPad.classList.add('off');
-          results.taps=tpN;
           document.getElementById('tpDone').hidden=false;
-          roundResult('taps', tpN, bench.taps, false, '',
+          roundResult(1,'taps', tpN, false, '',
             {herVal:'tpHerVal',himVal:'tpHimVal',her:'tp-her',him:'tp-him',verdict:'tpVerdict'});
         }
       },100);
     }
     tpN++; tpCount.textContent=tpN;
   });
-  document.getElementById('tpNext').addEventListener('click',()=>{ setLive('التحدي: التوقيت 🎯'); goto('r3',3); startMarker(); });
+  document.getElementById('tpNext').addEventListener('click',()=>{ setLive('التحدي: التوقيت'); goto('r3',3); startMarker(); });
 
-  /* ============ ROUND 3: timing ============ */
+  /* ============ R3: timing ============ */
   const marker=document.getElementById('marker');
   const tmTrials=document.getElementById('tmTrials');
   let tmOffsets=[], tmRAF=null, tmPos=0, tmRunning=false;
@@ -335,7 +388,7 @@
     const loop=()=>{
       const track=marker.parentElement.getBoundingClientRect();
       const w=track.width-10;
-      tmPos=(Math.sin((performance.now()-t0)/260)+1)/2; // 0..1
+      tmPos=(Math.sin((performance.now()-t0)/260)+1)/2;
       marker.style.left=(tmPos*w)+'px';
       tmRAF=requestAnimationFrame(loop);
     };
@@ -343,48 +396,121 @@
   }
   document.getElementById('tmStop').addEventListener('click',()=>{
     if(tmOffsets.length>=3||!tmRunning) return;
-    const off=Math.round(Math.abs(tmPos-0.5)*200); // % from center
+    const off=Math.round(Math.abs(tmPos-0.5)*200);
     tmOffsets.push(off);
     const t=document.createElement('div'); t.className='trial'; t.textContent=off+'%'; tmTrials.appendChild(t);
     if(tmOffsets.length>=3){
       cancelAnimationFrame(tmRAF); tmRunning=false;
       document.getElementById('tmStop').style.display='none';
       const avg=Math.round(tmOffsets.reduce((a,b)=>a+b,0)/3);
-      results.timing=avg;
       document.getElementById('tmDone').hidden=false;
-      roundResult('timing', avg, bench.timing, true, '%',
+      roundResult(2,'timing', avg, true, '%',
         {herVal:'tmHerVal',himVal:'tmHimVal',her:'tm-her',him:'tm-him',verdict:'tmVerdict'});
     }
   });
-  document.getElementById('tmNext').addEventListener('click',finish);
+  document.getElementById('tmNext').addEventListener('click',()=>{ setLive('التحدي: عين الصقر'); goto('r4',4); eagleStart(); });
+
+  /* ============ R4: eagle eye ============ */
+  const E_LEVELS=[['🌸','🌺'],['😀','😃'],['🧡','❤️']];
+  const eGrid=document.getElementById('eGrid');
+  let eLvl=0, eT0=0, ePenalty=0, eTick=null;
+  function eagleStart(){
+    eLvl=0; ePenalty=0; eT0=performance.now();
+    eTick=setInterval(()=>{ document.getElementById('eTime').textContent=(((performance.now()-eT0)/1000)+ePenalty).toFixed(1); },100);
+    eagleLevel();
+  }
+  function eagleLevel(){
+    document.getElementById('eLvl').textContent=eLvl+1;
+    const [base,odd]=E_LEVELS[eLvl];
+    const oddAt=Math.floor(Math.random()*25);
+    eGrid.innerHTML='';
+    for(let i=0;i<25;i++){
+      const b=document.createElement('button'); b.className='etile';
+      b.textContent=i===oddAt?odd:base;
+      b.addEventListener('pointerdown',()=>{
+        if(i===oddAt){
+          eLvl++;
+          if(eLvl>=3){
+            clearInterval(eTick);
+            const secs=+(((performance.now()-eT0)/1000)+ePenalty).toFixed(1);
+            document.getElementById('eDone').hidden=false;
+            eGrid.style.display='none';
+            roundResult(3,'eagle', secs, true, ' ث',
+              {herVal:'eHerVal',himVal:'eHimVal',her:'e-her',him:'e-him',verdict:'eVerdict'});
+          }else eagleLevel();
+        }else{
+          ePenalty+=1; b.classList.add('wrong');
+          setTimeout(()=>b.classList.remove('wrong'),300);
+        }
+      });
+      eGrid.appendChild(b);
+    }
+  }
+  document.getElementById('eNext').addEventListener('click',()=>{ setLive('التحدي: الذاكرة'); goto('r5',5); });
+
+  /* ============ R5: simon ============ */
+  const sPads=[...document.querySelectorAll('.spad')];
+  const sMsg=document.getElementById('sMsg');
+  let sSeq=[], sInput=[], sLevel=0, sBusy=false;
+  const SMAX=7;
+  function sFlash(i,ms){ return new Promise(r=>{ sPads[i].classList.add('lit'); setTimeout(()=>{ sPads[i].classList.remove('lit'); setTimeout(r,140); },ms); }); }
+  async function sShow(){
+    sBusy=true; sPads.forEach(p=>p.classList.add('locked'));
+    sMsg.textContent='راقبي…';
+    await new Promise(r=>setTimeout(r,500));
+    for(const i of sSeq) await sFlash(i,380);
+    sMsg.textContent='دورك';
+    sPads.forEach(p=>p.classList.remove('locked'));
+    sInput=[]; sBusy=false;
+  }
+  function sFinish(){
+    sPads.forEach(p=>p.classList.add('locked'));
+    document.getElementById('sDone').hidden=false;
+    roundResult(4,'simon', sLevel, false, '',
+      {herVal:'sHerVal',himVal:'sHimVal',her:'s-her',him:'s-him',verdict:'sVerdict'});
+  }
+  document.getElementById('sStart').addEventListener('click',function(){
+    this.style.display='none';
+    sSeq=[Math.floor(Math.random()*4),Math.floor(Math.random()*4)];
+    sLevel=0; sShow();
+  });
+  sPads.forEach((p,i)=>p.addEventListener('pointerdown',async()=>{
+    if(sBusy) return;
+    p.classList.add('lit'); setTimeout(()=>p.classList.remove('lit'),180);
+    sInput.push(i);
+    const k=sInput.length-1;
+    if(sSeq[k]!==i){ sMsg.textContent='وصلتي للمستوى '+sLevel; sFinish(); return; }
+    if(sInput.length===sSeq.length){
+      sLevel=sSeq.length;
+      if(sLevel>=SMAX){ sMsg.textContent='وصلتي للمستوى '+sLevel; sFinish(); return; }
+      sSeq.push(Math.floor(Math.random()*4));
+      sMsg.textContent='مستوى '+(sLevel+1);
+      setTimeout(sShow,600);
+    }
+  }));
+  document.getElementById('sNext').addEventListener('click',finish);
 
   /* ============ FINAL ============ */
-  const RNAMES={reaction:'⚡ ردّة الفعل', taps:'👆 السرعة', timing:'🎯 التوقيت'};
+  const RNAMES={reaction:'ردّة الفعل', taps:'السرعة', timing:'التوقيت', eagle:'عين الصقر', simon:'الذاكرة'};
   function finish(){
-    if(M_MODE){
-      try{ db && db.ref('challenge/mohammad').set({reaction:results.reaction, taps:results.taps, timing:results.timing, ts:firebase.database.ServerValue.TIMESTAMP}); }catch(e){}
-      document.getElementById('finBig').textContent='✅';
-      document.getElementById('finTitle').textContent='سكورك اتسجّل';
-      document.getElementById('finScore').textContent=results.reaction+'ms · '+results.taps+' · '+results.timing+'%';
-      document.getElementById('finRounds').innerHTML='';
-      document.getElementById('finStake').textContent='هلأ ابعتلها الرابط العادي (بدون ?m=1)';
-      goto('final',3);
-      return;
-    }
-    const herWon=wins.her>wins.him;
-    document.getElementById('finBig').textContent=herWon?'👑':'😌';
-    document.getElementById('finTitle').textContent=herWon?'غلبتيه… بجدارة':'محمد غلب';
+    const herWon=wins.her>wins.him; // rigged: always true
+    document.getElementById('finTitle').textContent=herWon?'غلبتيه':'محمد غلب';
     document.getElementById('finScore').textContent=wins.her+' - '+wins.him;
     document.getElementById('finRounds').innerHTML=roundLog.map(r=>
-      `<div class="rrow"><span>${RNAMES[r.key]}</span><b class="${r.herWins?'w':'l'}">${r.herWins?'إلك':'لمحمد'} (${r.her} مقابل ${r.him})</b></div>`).join('');
-    document.getElementById('finStake').textContent=herWon?'☕ القهوة على محمد':'☕ القهوة عليكي… اتفقنا';
-    face.textContent=herWon?'😳':'😎'; faceSub.textContent=herWon?'رح يدفع…':'مستني قهوتي';
-    setLive('التحدي: خلّص — '+(herWon?'أسيل غلبت 👑':'محمد غلب 😎'));
+      `<div class="rrow"><span>${RNAMES[r.key]}</span><b class="${r.herWon?'w':'l'}">${r.herWon?'إلك':'لمحمد'} (${r.her} مقابل ${r.him})</b></div>`).join('');
+    document.getElementById('prizeText').textContent= herWon
+      ? 'جائزتك: تبعتي فيديو إلك لمحمد'
+      : 'جائزة محمد: تبعتيله فيديو إلك';
+    face.textContent='😳'; faceSub.textContent='مستني الفيديو';
+    setLive('التحدي: خلّص — '+wins.her+'-'+wins.him);
     celebrate();
-    log('challenge_done',{her:wins.her, him:wins.him, winner:herWon?'aseel':'mohammad',
-      reaction:results.reaction, taps:results.taps, timing:results.timing});
-    goto('final',3);
+    log('challenge_done',{her:wins.her, him:wins.him, winner:herWon?'aseel':'mohammad'});
+    goto('final',5);
   }
+  document.getElementById('promiseBtn').addEventListener('click',function(){
+    this.textContent='تم ✓'; this.disabled=true; this.style.opacity=.6;
+    log('video_promise',{challenge:'فيديو (جائزة التحدي)'});
+  });
 
   /* ---------- fx ---------- */
   function burstCenter(){ const em=['✨','⚡','💫','⭐'];
@@ -399,8 +525,6 @@
   const sky=document.getElementById('sky');
   for(let i=0;i<14;i++){ const d=document.createElement('div'); d.className='dot'; d.style.left=Math.random()*100+'%';
     const size=8+Math.random()*16; d.style.width=d.style.height=size+'px'; d.style.animationDuration=(9+Math.random()*10)+'s'; d.style.animationDelay=(-Math.random()*12)+'s'; sky.appendChild(d); }
-
-  if(M_MODE){ document.querySelector('.name small').textContent='وضع التسجيل'; document.getElementById('startBtn').textContent='سجّل سكورك 🎯'; }
 </script>
 </body>
 </html>
