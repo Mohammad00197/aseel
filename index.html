@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<title>تصبحي على خير</title>
+<title>تصبحي على خير يا أسيل</title>
 <style>
   :root{ --t:1; --line:#f0dfb8; }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
@@ -39,6 +39,13 @@
   .p-s2   {animation-duration:calc(var(--t)*1.5s);animation-delay:calc(var(--t)*13.5s)}
   .p-s3   {animation-duration:calc(var(--t)*1.5s);animation-delay:calc(var(--t)*15.1s)}
   .p-shoot{animation-duration:calc(var(--t)*2.1s);animation-delay:calc(var(--t)*16.9s)}
+  .name path{stroke:#f7ead0;stroke-width:3.1}
+  .p-n1{animation-duration:calc(var(--t)*.9s); animation-delay:calc(var(--t)*19.4s)}
+  .p-n2{animation-duration:calc(var(--t)*.7s); animation-delay:calc(var(--t)*20.4s)}
+  .p-n3{animation-duration:calc(var(--t)*1.4s);animation-delay:calc(var(--t)*21.2s)}
+  .p-n4{animation-duration:calc(var(--t)*1s);  animation-delay:calc(var(--t)*22.7s)}
+  .p-n5{animation-duration:calc(var(--t)*.5s); animation-delay:calc(var(--t)*23.8s)}
+  .p-n6{animation-duration:calc(var(--t)*1.6s);animation-delay:calc(var(--t)*24.4s)}
 
   .msg{
     text-align:center;margin-top:30px;z-index:2;
@@ -78,6 +85,15 @@
       <!-- shooting star -->
       <path class="draw p-shoot" pathLength="1"
         d="M 30 196 Q 80 164 118 152 M 128 148 Q 131 151 135 147"/>
+      <!-- her name, written like a signature -->
+      <g class="name">
+        <path class="draw p-n1" pathLength="1" d="M 318 316 L 318 368"/>
+        <path class="draw p-n2" pathLength="1" d="M 325 303 Q 317 300 319 309 Q 320 313 326 310"/>
+        <path class="draw p-n3" pathLength="1" d="M 306 368 Q 302 357 298 368 Q 294 357 290 368 Q 286 357 282 368 L 276 368"/>
+        <path class="draw p-n4" pathLength="1" d="M 276 368 Q 270 361 264 366 Q 260 369 255 368 L 248 368"/>
+        <path class="draw p-n5" pathLength="1" d="M 266 380 L 266.2 380.2 M 259 380 L 259.2 380.2"/>
+        <path class="draw p-n6" pathLength="1" d="M 248 312 L 248 368 Q 248 386 228 384 Q 212 382 216 368 Q 217 363 222 364"/>
+      </g>
     </svg>
   </div>
 
@@ -95,7 +111,7 @@
   if(FAST) document.documentElement.style.setProperty('--t', T);
 
   // message appears after the drawing finishes
-  setTimeout(()=>document.body.classList.add('done'), 19600*T);
+  setTimeout(()=>document.body.classList.add('done'), 26600*T);
 
   // background twinkles
   const bg=document.getElementById('bg');
